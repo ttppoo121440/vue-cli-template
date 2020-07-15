@@ -70,7 +70,7 @@ export default {
   watch: {
     checkboxVal(valArr) {
       this.formThead = this.columns.filter((i) => valArr.indexOf(i.name) >= 0);
-      this.key = this.key + 1;
+      this.key += 1;
       localStorage.setItem(
         `tableHead_${this.title}`,
         JSON.stringify(this.checkboxVal),
