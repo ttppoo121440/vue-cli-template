@@ -67,9 +67,6 @@ export default {
           icon: "th-large",
           titleItem: [
             { title: "Home", icon: "th-large", router: "/" },
-            { title: "工作項目", icon: "file-word", router: "/workItem" },
-            { title: "影音管理", icon: "file-word", router: "/movie" },
-            { title: "Banner管理", icon: "file-word", router: "/banner" },
           ],
         },
         {
