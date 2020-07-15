@@ -81,20 +81,6 @@ export default {
     this.tableHead();
   },
   methods: {
-    getImg(file) {
-      const icon = {
-        doc: this.$store.state.FileUpload.word,
-        docx: this.$store.state.FileUpload.word,
-        xls: this.$store.state.FileUpload.excel,
-        xlsx: this.$store.state.FileUpload.excel,
-        pdf: this.$store.state.FileUpload.pdf,
-      };
-      console.log(file);
-      if (icon[file.type] === undefined) {
-        return `${process.env.VUE_APP_API}/file/download/${file.guid}`;
-      }
-      return icon[file.type];
-    },
     tableHead() {
       if (localStorage.getItem(`tableHead_${this.title}`)) {
         this.checkboxVal = JSON.parse(
@@ -102,7 +88,6 @@ export default {
         );
       } else {
         [...this.columns].forEach((item, index) => {
-          console.log(item.name);
           this.checkboxVal.push(item.name);
           if (item.name === this.checkboxVal[index]) {
             this.formThead.push(item);
@@ -132,20 +117,18 @@ export default {
       this.updateSeletion();
     },
     updateSeletion() {
-      const vm = this;
       this.$nextTick(() => {
-        vm.data.forEach((item) => {
+        this.data.forEach((item) => {
           if (this.multipleSelection.indexOf(item) >= 0) {
-            vm.isUpdateSelection = false; // 不更新選中行
-            vm.$refs.multipleTable.toggleRowSelection(item, true); // 選中所在行
+            this.isUpdateSelection = false; // 不更新選中行
+            this.$refs.multipleTable.toggleRowSelection(item, true); // 選中所在行
           }
         });
-        vm.isUpdateSelection = true; // 更新選中行
+        this.isUpdateSelection = true; // 更新選中行
       });
     },
     handleBtnClick(method, row) {
       this.$emit("handleBtnClick", { method, row });
-      // this.$parent.printData();//直接調用父組件的方法
     },
   },
 };
